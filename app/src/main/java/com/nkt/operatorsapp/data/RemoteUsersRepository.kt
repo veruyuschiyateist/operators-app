@@ -25,8 +25,8 @@ class RemoteUsersRepository @Inject constructor(
                     val hash = document.data["hash"].toString()
 
                     users.add(User(type = getType(type), username = username, hash = hash))
-                    continuation.resume(users)
                 }
+                continuation.resume(users)
             }
             .addOnFailureListener { exception ->
                 continuation.resumeWithException(exception)
@@ -46,18 +46,41 @@ class RemoteUsersRepository @Inject constructor(
                 }
         }
 
-    override suspend fun delete(user: User): Boolean {
-        TODO("Not yet implemented")
+    override suspend fun delete(user: User): Boolean = suspendCancellableCoroutine { continuation ->
+        db.collection("users")
+            .whereEqualTo("username", user.username)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    val documentId = document.id
+
+                    db.collection("users")
+                        .document(documentId)
+                        .delete()
+                        .addOnSuccessListener {
+                            continuation.resume(true)
+                        }
+                        .addOnFailureListener {
+                            continuation.resume(false)
+                        }
+                }
+            }
+            .addOnFailureListener {
+                continuation.resume(false)
+            }
     }
 
-    private fun getType(type: String): UserType {
-        return when (type) {
-            "Operator 1" -> UserType.OPERATOR_1
-            "Operator 2" -> UserType.OPERATOR_2
-            else -> {
-                UserType.ADMINISTRATOR
+    companion object {
+        fun getType(type: String): UserType {
+            return when (type) {
+                "OPERATOR_1" -> UserType.OPERATOR_1
+                "OPERATOR_2" -> UserType.OPERATOR_2
+                else -> {
+                    UserType.ADMINISTRATOR
+                }
             }
         }
     }
+
 
 }

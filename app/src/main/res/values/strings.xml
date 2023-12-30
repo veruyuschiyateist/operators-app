@@ -26,4 +26,8 @@
     <string name="param1">Параметр 1</string>
     <string name="param2">Параметр 2</string>
     <string name="param3">Параметр 3</string>
+    <string name="exit">Вийти</string>
+    <string name="polygon_1">Polygon 1</string>
+    <string name="polygon_3">Polygon 3</string>
+    <string name="auth_title">Авторизація</string>
 </resources>

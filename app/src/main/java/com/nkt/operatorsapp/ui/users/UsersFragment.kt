@@ -15,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nkt.operatorsapp.MainActivity
 import com.nkt.operatorsapp.R
 import com.nkt.operatorsapp.data.User
 import com.nkt.operatorsapp.data.UserType
@@ -33,6 +34,12 @@ class UsersFragment : Fragment() {
     private lateinit var queriesAdapter: QueriesAdapter
 
     private val viewModel by viewModels<UsersViewModel>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity() as MainActivity).binding.topAppBar.setTitle(R.string.administrator)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +101,7 @@ class UsersFragment : Fragment() {
 
     private fun Context.convertUserType(type: String): UserType = when (type) {
         getString(R.string.operator_1) -> UserType.OPERATOR_1
-        getString(R.string.operator_1) -> UserType.OPERATOR_2
+        getString(R.string.operator_2) -> UserType.OPERATOR_2
         else -> UserType.ADMINISTRATOR
     }
 

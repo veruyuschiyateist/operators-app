@@ -1,9 +1,11 @@
 package com.nkt.operatorsapp.di
 
+import com.nkt.operatorsapp.data.AuthRepositoryImpl
 import com.nkt.operatorsapp.data.RemoteParamsRepository
 import com.nkt.operatorsapp.data.repositories.QuestionnaireRepository
 import com.nkt.operatorsapp.data.RemoteQuestionnaireRepository
 import com.nkt.operatorsapp.data.RemoteUsersRepository
+import com.nkt.operatorsapp.data.repositories.AuthRepository
 import com.nkt.operatorsapp.data.repositories.ParamsRepository
 import com.nkt.operatorsapp.data.repositories.UsersRepository
 import dagger.Binds
@@ -33,4 +35,10 @@ abstract class DataModule {
     abstract fun bindsParamsRepository(
         paramsRepository: RemoteParamsRepository
     ): ParamsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsAuthRepository(
+        authRepository: AuthRepositoryImpl
+    ): AuthRepository
 }

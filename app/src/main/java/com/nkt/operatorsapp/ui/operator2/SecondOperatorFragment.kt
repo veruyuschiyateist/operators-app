@@ -1,6 +1,7 @@
 package com.nkt.operatorsapp.ui.operator2
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.nkt.operatorsapp.MainActivity
 import com.nkt.operatorsapp.R
 import com.nkt.operatorsapp.data.RemoteParamsRepository.Companion.PARAM_1
 import com.nkt.operatorsapp.data.RemoteParamsRepository.Companion.PARAM_2
@@ -26,6 +28,12 @@ class SecondOperatorFragment : Fragment() {
     private lateinit var binding: FragmentSecondOperatorBinding
 
     private val viewModel by viewModels<SecondOperatorViewModel>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity() as MainActivity).binding.topAppBar.setTitle(R.string.operator_2)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
