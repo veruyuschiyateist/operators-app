@@ -55,6 +55,18 @@
         app:layout_constraintTop_toBottomOf="@id/user_type_title" />
 
     <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/back"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
         android:id="@+id/return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -30,4 +30,6 @@
     <string name="polygon_1">Polygon 1</string>
     <string name="polygon_3">Polygon 3</string>
     <string name="auth_title">Авторизація</string>
+    <string name="back">Повернутися</string>
+    <string name="profile">Профіль</string>
 </resources>

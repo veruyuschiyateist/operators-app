@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.nkt.operatorsapp.MainActivity
 import com.nkt.operatorsapp.R
 import com.nkt.operatorsapp.data.UserType
 import com.nkt.operatorsapp.databinding.FragmentProfileBinding
@@ -25,6 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (requireActivity() as MainActivity).binding.topAppBar.title = getString(R.string.profile)
     }
 
     override fun onCreateView(
@@ -45,7 +47,13 @@ class ProfileFragment : Fragment() {
                 else -> getString(R.string.operator_2)
             }
         }
+        binding.backButton.setOnClickListener {
+            val navHostFragment =
+                (requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+            val navController = navHostFragment.navController
 
+            navController.popBackStack()
+        }
         binding.returnButton.setOnClickListener {
             viewModel.signOut()
 

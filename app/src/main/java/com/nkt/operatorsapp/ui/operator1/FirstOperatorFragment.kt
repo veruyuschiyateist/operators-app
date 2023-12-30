@@ -29,8 +29,8 @@ class FirstOperatorFragment : Fragment() {
 
     private val viewModel by viewModels<FirstOperatorViewModel>()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onStart() {
+        super.onStart()
 
         (requireActivity() as MainActivity).binding.topAppBar.setTitle(R.string.operator_1)
     }
